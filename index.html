@@ -2,18 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-        <html lang="en">
+    <html lang="en">
 
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <title>GO BOOTH</title>
-            <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Bubblegum+Sans">
-            <link rel="stylesheet" href="styles.css">
-        </head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>GO BOOTH</title>
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Bubblegum+Sans">
+        <link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="styles.css">
+    </head>
 
 <body>
+
 <div class="container">
 
     <div class="content">
@@ -82,9 +84,15 @@
             </div>
         </div>
 
-        </div>
     </div>
 </div>
+</div>
+<footer>
+    <a href="https://twitter.com/aarushikansal">slide into my dms: @aarushikansal<a/>
+    </a>
+</footer>
+
+
 
 
 <script src="web_exec.js"></script>
@@ -102,7 +110,7 @@
     const go = new Go();
     let mod, inst;
     WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject).then(
-         result => {
+        result => {
             mod = result.module;
             inst = result.instance;
 
