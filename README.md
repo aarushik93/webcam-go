@@ -14,3 +14,5 @@ In browser testing, so you don't need to set up node js. Follow:  https://github
 
 `docker run --rm -it -p 8080:8080 wasm-go`
 
+# Contact details
+twitter.com/aarushikansal
