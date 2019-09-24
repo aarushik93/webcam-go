@@ -5,6 +5,9 @@ Visit the working app at: https://wasm-webcam.herokuapp.com
 # Compiling
 Requires Go 1.13 or above.
 
+GOOS=js GOARCH=wasm go build -o main.wasm main.go
+
+
 # Testing
 In browser testing, so you don't need to set up node js. Follow:  https://github.com/agnivade/wasmbrowsertest
 

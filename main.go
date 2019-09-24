@@ -11,81 +11,85 @@ var threshold = 127
 func applyFilter(this js.Value, args []js.Value) interface{} {
 
 	val := args[0].Int()
-	var data []byte
+	length := args[1].Length()
+
+	jsPixels := make(filter.Pixels, length)
+
+	_ = js.CopyBytesToGo(jsPixels, args[1])
 
 	if val == 0 {
-		data = makegrey(args[1])
+		jsPixels.MakeGrey()
 
 	} else if val == 1 {
-		data = makeInvert(args[1])
+		jsPixels.Invert()
+		//data = makeInvert(args[1])
 
 	} else if val == 2 {
-		data = noise(args[1])
+		jsPixels.MakeNoise()
+		//data = noise(args[1])
 
 	} else if val == 3 {
-		data = makeRed(args[1])
-
-	} else {
-		data = doNothing(args[1])
+		jsPixels.MakeRed()
+		//data = makeRed(args[1])
 
 	}
 
-	buf := uint8Array.New(len(data))
-	js.CopyBytesToJS(buf, data)
+	buf := uint8Array.New(len(jsPixels))
+	js.CopyBytesToJS(buf, jsPixels)
 
 	return buf
 }
 
-func makegrey(arg js.Value) []byte {
-	length := arg.Length()
-	nongreyed := make(filter.Pixels, length)
-
-	_ = js.CopyBytesToGo(nongreyed, arg)
-	nongreyed.MakeGrey()
-
-	return nongreyed
-}
-
-func makeInvert(arg js.Value) []byte {
-	length := arg.Length()
-	nontint := make(filter.Pixels, length)
-
-	_ = js.CopyBytesToGo(nontint, arg)
-
-	nontint.Invert()
-
-	return nontint
-
-}
-
-func noise(arg js.Value) []byte {
-	length := arg.Length()
-	nontint := make(filter.Pixels, length)
-
-	_ = js.CopyBytesToGo(nontint, arg)
-	nontint.MakeNoise()
-	return nontint
-
-}
-
-func makeRed(arg js.Value) []byte {
-	length := arg.Length()
-	nontint := make(filter.Pixels, length)
-
-	_ = js.CopyBytesToGo(nontint, arg)
-	nontint.MakeRed()
-
-	return nontint
-
-}
-
-func doNothing(arg js.Value) []byte {
-	length := arg.Length()
-	ogPixels := make([]byte, length)
-	_ = js.CopyBytesToGo(ogPixels, arg)
-
-	return ogPixels
-}
+//func makegrey(arg js.Value) []byte {
+//	length := arg.Length()
+//	nongreyed := make(filter.Pixels, length)
+//
+//	_ = js.CopyBytesToGo(nongreyed, arg)
+//	nongreyed.MakeGrey()
+//
+//	return nongreyed
+//}
+//
+//func makeInvert(arg js.Value) []byte {
+//	length := arg.Length()
+//	nontint := make(filter.Pixels, length)
+//
+//	_ = js.CopyBytesToGo(nontint, arg)
+//
+//	nontint.Invert()
+//
+//	return nontint
+//
+//}
+//
+//func noise(arg js.Value) []byte {
+//	length := arg.Length()
+//	nontint := make(filter.Pixels, length)
+//
+//	_ = js.CopyBytesToGo(nontint, arg)
+//	nontint.MakeNoise()
+//	return nontint
+//
+//}
+//
+//func makeRed(arg js.Value) []byte {
+//	length := arg.Length()
+//	nontint := make(filter.Pixels, length)
+//
+//	_ = js.CopyBytesToGo(nontint, arg)
+//	nontint.MakeRed()
+//
+//	return nontint
+//
+//}
+//
+//func doNothing(arg js.Value) []byte {
+//	length := arg.Length()
+//	ogPixels := make([]byte, length)
+//	_ = js.CopyBytesToGo(ogPixels, arg)
+//
+//	return ogPixels
+//}
 
 
 func main() {
